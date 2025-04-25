@@ -8,15 +8,15 @@ namespace App\Controller;
 // On indique ici le namespace de la classe qu'on veut utiliser et Symfony + composer font le require automatiquement
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use \DateTime;
 
-class CocktailsList extends AbstractController
+class CocktailsController extends AbstractController
 {
 
-    #[Route('/cocktails', name: 'list-cocktails')]
-
-    public function listCocktails()
+    // Création d'une fonction qui appelle le tableau
+    public function getCocktails()
     {
-        $cocktails = [
+        return [
             1 => [
                 'id'            => 1,
                 'nom'           => 'Mojito',
@@ -32,7 +32,6 @@ class CocktailsList extends AbstractController
                 'date_creation' => '1942-01-01',
                 'description'   => 'Classique cubain ultra-rafraîchissant mêlant menthe et citron vert.'
             ],
-
             2 => [
                 'id'            => 2,
                 'nom'           => 'Margarita',
@@ -47,7 +46,6 @@ class CocktailsList extends AbstractController
                 'date_creation' => '1938-07-04',
                 'description'   => 'Tequila, triple-sec et citron vert dans un verre givré de sel pour un équilibre acidulé-salé.'
             ],
-
             3 => [
                 'id'            => 3,
                 'nom'           => 'Old Fashioned',
@@ -62,7 +60,6 @@ class CocktailsList extends AbstractController
                 'date_creation' => '1880-05-15',
                 'description'   => 'Icône des classiques : un whisky subtilement sucré et aromatisé aux bitters.'
             ],
-
             4 => [
                 'id'            => 4,
                 'nom'           => 'Piña Colada',
@@ -76,7 +73,6 @@ class CocktailsList extends AbstractController
                 'date_creation' => '1954-08-16',
                 'description'   => 'Spécialité portoricaine crémeuse et fruitée à base d’ananas et de coco.'
             ],
-
             5 => [
                 'id'            => 5,
                 'nom'           => 'Negroni',
@@ -92,7 +88,54 @@ class CocktailsList extends AbstractController
                 'description'   => 'Amertume élégante et notes d’agrumes pour ce grand classique italien.'
             ],
         ];
+    }
 
+    // URL page d'accueil
+    #[Route('/', name:'home')]
+
+    public function lastCocktails()
+    {
+        // On stocke la fonction qui appelle le tableau dans une variable
+        $cocktails = $this->getCocktails();
+
+        // Trie les cocktails par date de création dans un ordre décroissant
+        usort($cocktails, function ($a, $b) {
+            // Crée des objets DateTime à partir des dates de création
+            $dateA = new DateTime($a['date_creation']);
+            $dateB = new DateTime($b['date_creation']);
+            return $dateB <=> $dateA; // Compare les dates et les retourne dans l'ordre décroissant (plus récent au plus vieux)
+        });
+
+        // Utilisation de la méthode render qui permet de récupérer un fichier de view twig
+        return $this->render('home.html.twig', [
+            // Découpe le tableau 'cocktails' et prend ses 2 derniers cocktails (dans l'ordre décroissant défini au dessus)
+            'cocktails' => array_slice($cocktails, 0, 2),
+        ]);
+    }
+
+    // URL pour la page affichant tout les cocktails
+    #[Route('/cocktails', name: 'list-cocktails')]
+
+    // Permet d'afficher tout les cocktails
+    public function listCocktails()
+    {
+        // On stocke la fonction qui appelle le tableau dans une variable
+        $cocktails = $this->getCocktails();
+
+        // On appelle la variable qui contient le tableau dans la page twig
         return $this->render('cocktails-list.html.twig', ['cocktails' => $cocktails]);
+    }
+
+    // URL pour la page d'un cocktail en particulier
+    //{id} permet d'afficher l'id du cocktail sur lequel on clique dans l'url
+    #[Route('/cocktail-{id}', name: 'cocktail-show')]
+
+    // La partie {id} de l'URL est transmise automatiquement en paramètre lorsqu'on clique
+    public function cocktailShow($id)
+    {
+        $cocktails = $this->getCocktails();
+
+        // $id ici permet permet de récupérer le bon cocktail qui correspond à l'id donné dans le tableau
+        return $this->render('cocktail-show.html.twig', ['cocktail' => $cocktails[$id]]);
     }
 }

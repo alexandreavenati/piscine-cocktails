@@ -7,16 +7,14 @@ namespace App\Controller;
 // On indique ici le namespace de la classe qu'on veut utiliser et Symfony + composer font le require automatiquement
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use \DateTime;
 
 class HomeController extends AbstractController
 {
 
-    #[Route('/', name:'home')]
-
-    public function home()
+    // Création d'une fonction qui appelle le tableau
+    public function getCocktails()
     {
-        $cocktails = [
+        return [
             1 => [
                 'id'            => 1,
                 'nom'           => 'Mojito',
@@ -32,7 +30,6 @@ class HomeController extends AbstractController
                 'date_creation' => '1942-01-01',
                 'description'   => 'Classique cubain ultra-rafraîchissant mêlant menthe et citron vert.'
             ],
-
             2 => [
                 'id'            => 2,
                 'nom'           => 'Margarita',
@@ -47,7 +44,6 @@ class HomeController extends AbstractController
                 'date_creation' => '1938-07-04',
                 'description'   => 'Tequila, triple-sec et citron vert dans un verre givré de sel pour un équilibre acidulé-salé.'
             ],
-
             3 => [
                 'id'            => 3,
                 'nom'           => 'Old Fashioned',
@@ -62,7 +58,6 @@ class HomeController extends AbstractController
                 'date_creation' => '1880-05-15',
                 'description'   => 'Icône des classiques : un whisky subtilement sucré et aromatisé aux bitters.'
             ],
-
             4 => [
                 'id'            => 4,
                 'nom'           => 'Piña Colada',
@@ -76,7 +71,6 @@ class HomeController extends AbstractController
                 'date_creation' => '1954-08-16',
                 'description'   => 'Spécialité portoricaine crémeuse et fruitée à base d’ananas et de coco.'
             ],
-
             5 => [
                 'id'            => 5,
                 'nom'           => 'Negroni',
@@ -92,19 +86,5 @@ class HomeController extends AbstractController
                 'description'   => 'Amertume élégante et notes d’agrumes pour ce grand classique italien.'
             ],
         ];
-
-        // Trie les cocktails par date de création dans un ordre décroissant
-        usort($cocktails, function($a, $b) {
-            // Crée des objets DateTime à partir des dates de création
-            $dateA = new DateTime($a['date_creation']);
-            $dateB = new DateTime($b['date_creation']);
-            return $dateB <=> $dateA; // Compare les dates et les retourne dans l'ordre décroissant (plus récent au plus vieux)
-        });
-
-        // Utilisation de la méthode render qui permet de récupérer un fichier de view twig
-        return $this->render('home.html.twig', [
-            // Découpe le tableau 'cocktails' et prend ses 2 derniers cocktails (dans l'ordre décroissant défini au dessus)
-            'cocktails' => array_slice($cocktails, 0, 2),
-        ]);
     }
 }

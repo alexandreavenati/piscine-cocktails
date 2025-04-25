@@ -1,0 +1,34 @@
+{% include 'partial/_header.html.twig' %}
+
+<h1>Bienvenue sur la page des cocktails</h1>
+
+<section
+	class="cocktail-list">
+	{# Boucle pour afficher les cocktails du tableau "cocktail" #}
+	{% for cocktail in cocktails %}
+		<article class="cocktail-card">
+			<img src="{{ cocktail.image }}" alt="{{ cocktail.nom }}">
+			<div
+				class="cocktail-info">
+				{# Vérifie si c'est le troisième cocktail (Old Fashioned) pour le rendre cliquable #}
+				{% if cocktail.id == 3 %}
+					<h2>
+						<a href="{{ path('cocktail-trois') }}">{{ cocktail.nom }}</a>
+					</h2>
+				{% else %}
+					<h2>{{ cocktail.nom }}</h2>
+				{% endif %}
+				<p>{{ cocktail.description }}</p>
+				<ul>
+					{% for ingredient in cocktail.ingredients %}
+						<li>{{ ingredient }}</li>
+					{% endfor %}
+				</ul>
+				<p class="date">Date de création:
+					{{ cocktail.date_creation | date }}</p>
+			</div>
+		</article>
+	{% endfor %}
+</section>
+
+{% include 'partial/_footer.html.twig' %}

@@ -9,7 +9,6 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use \DateTime;
-use Symfony\Component\HttpFoundation\Request;
 
 class CocktailsController extends AbstractController
 {
@@ -106,24 +105,14 @@ class CocktailsController extends AbstractController
 
     // URL pour la page d'un cocktail en particulier
     //{id} permet d'afficher l'id du cocktail sur lequel on clique dans l'url
-    #[Route('/cocktail', name: 'cocktail-show')]
+    #[Route('/cocktail/{id}', name: 'cocktail-show')]
 
-    // dans la fonction displaySingleCocktails, crééé un parametre $request. Si j'ajoute devant ce parametre le nom 
-    // d'une classe existante ça demande à symfony de créer une instance de cette (new NomDeLaClasse)
-	// automatiquement dans la variable $request
-	// c'est ce qu'on appelle l'autowire (cablage automatique)
-    public function cocktailShow(Request $request)
+    // La partie {id} de l'URL est transmise automatiquement en paramètre lorsqu'on clique
+    public function cocktailShow($id)
     {
         $cocktails = $this->getCocktails();
 
-        // j'utilise l'instance de la classe Request créé par symfony
-		// j'utilise la propriété query pour accéder aux données GET
-		// j'utilise la fonction ->get pour récupérer un parametre en particulier
-        $cocktailId= $request->query->get('id');
-
-        $cocktail = $cocktails[$cocktailId];
-
-        // permet de récupérer le bon cocktail qui correspond à l'id donné dans le tableau
-        return $this->render('cocktail-show.html.twig', ['cocktail' => $cocktail]);
+        // $id ici permet permet de récupérer le bon cocktail qui correspond à l'id donné dans le tableau
+        return $this->render('cocktail-show.html.twig', ['cocktail' => $cocktails[$id]]);
     }
 }

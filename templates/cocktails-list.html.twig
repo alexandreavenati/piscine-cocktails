@@ -10,17 +10,11 @@
 			<img src="{{ cocktail.image }}" alt="{{ cocktail.nom }}">
 			<div
 				class="cocktail-info">
-				{# {{ path('cocktail-show', {'id': cocktail.id}) }} génère un url selon l'id et le lien cliquable
-					nous permet de nous y rediriger #}
+				{# {{ path('cocktail-show') }}?id={{ cocktail.id }} pour récupérer l'id du cocktail cliqué #}
 				<h2>
-					<a href="{{ path('cocktail-show', {'id': cocktail.id}) }}">{{ cocktail.nom }}</a>
+					<a href="{{ path('cocktail-show') }}?id={{ cocktail.id }}">{{ cocktail.nom }}</a>
 				</h2>
 				<p>{{ cocktail.description }}</p>
-				<ul>
-					{% for ingredient in cocktail.ingredients %}
-						<li>{{ ingredient }}</li>
-					{% endfor %}
-				</ul>
 				<p class="date">Date de création:
 					{{ cocktail.date_creation | date('d/m/Y') }}</p>
 			</div>

@@ -7,6 +7,8 @@ namespace App\Controller;
 // On indique ici le namespace de la classe qu'on veut utiliser et Symfony + composer font le require automatiquement
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use \DateTime;
+
 
 class HomeController extends AbstractController
 {
@@ -86,5 +88,28 @@ class HomeController extends AbstractController
                 'description'   => 'Amertume élégante et notes d’agrumes pour ce grand classique italien.'
             ],
         ];
+    }
+
+    // URL page d'accueil
+    #[Route('/', name:'home')]
+
+    public function lastCocktails()
+    {
+        // On stocke la fonction qui appelle le tableau dans une variable
+        $cocktails = $this->getCocktails();
+
+        // Trie les cocktails par date de création dans un ordre décroissant
+        usort($cocktails, function ($a, $b) {
+            // Crée des objets DateTime à partir des dates de création
+            $dateA = new DateTime($a['date_creation']);
+            $dateB = new DateTime($b['date_creation']);
+            return $dateB <=> $dateA; // Compare les dates et les retourne dans l'ordre décroissant (plus récent au plus vieux)
+        });
+
+        // Utilisation de la méthode render qui permet de récupérer un fichier de view twig
+        return $this->render('home.html.twig', [
+            // Découpe le tableau 'cocktails' et prend ses 2 derniers cocktails (dans l'ordre décroissant défini au dessus)
+            'cocktails' => array_slice($cocktails, 0, 2),
+        ]);
     }
 }

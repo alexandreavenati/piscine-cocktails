@@ -7,7 +7,6 @@
     <article class="cocktail-card">
         <img src="{{ cocktail.image }}" alt="{{ cocktail.nom }}">
         <div class="cocktail-info">
-            <h2>{{ cocktail.nom }}</h2>
             <p>{{ cocktail.description }}</p>
             <ul>
                 {% for ingredient in cocktail.ingredients %}

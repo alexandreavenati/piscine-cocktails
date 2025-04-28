@@ -2,25 +2,6 @@
 
 <h1>Liste des cocktails</h1>
 
-<section
-	class="cocktail-list">
-	{# Boucle pour afficher les cocktails du tableau "cocktail" #}
-	{% for cocktail in cocktails %}
-		<article class="cocktail-card">
-			<img src="{{ cocktail.image }}" alt="{{ cocktail.nom }}">
-			<div
-				class="cocktail-info">
-				{# {{ path('cocktail-show', {'id': cocktail.id}) }} génère un url selon l'id et le lien cliquable
-					nous permet de nous y rediriger #}
-				<h2>
-					<a href="{{ path('cocktail-show', {'id': cocktail.id}) }}">{{ cocktail.nom }}</a>
-				</h2>
-				<p>{{ cocktail.description }}</p>
-				<p class="date">Date de création:
-					{{ cocktail.date_creation | date('d/m/Y') }}</p>
-			</div>
-		</article>
-	{% endfor %}
-</section>
+{% include 'partial/_loop-cocktails.html.twig' %}
 
 {% include 'partial/_footer.html.twig' %}

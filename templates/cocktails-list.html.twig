@@ -1,9 +1,12 @@
-{% include 'partial/_header.html.twig' %}
+{# Héritage de la structure du fichier 'base.html.twig' #}
+{% extends 'base.html.twig' %}
 
-{% include 'partial/_aside-ad.html.twig' %}
+{% block main %}
+<main>
 
-<h1>Liste des cocktails</h1>
+	<h1>Liste des cocktails</h1>
 
-{% include 'partial/_loop-cocktails.html.twig' %}
+	{% include 'partial/_loop-cocktails.html.twig' %}
 
-{% include 'partial/_footer.html.twig' %}
+</main>
+{% endblock main %}

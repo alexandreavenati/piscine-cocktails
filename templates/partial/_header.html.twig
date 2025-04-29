@@ -1,0 +1,21 @@
+<body>
+	<header>
+		<section class="header-content">
+			<div><img src="{{ asset('assets/img/cocktail-logo.png') }}" alt="logo site" class="logo"></div>
+			<nav>
+				<ul class="nav-links">
+					<li>
+						{# path() génère l'url grâce au "name" donné à la Route dans le Controller #}
+						<a href="{{ path('home') }}">Accueil</a>
+					</li>
+					<li>
+						<a href="{{ path('list-cocktails') }}">Tout les cocktails</a>
+					</li>
+					<li>
+						<a href="{{ path('categories') }}">Catégories</a>
+					</li>
+				</ul>
+			</nav>
+		</section>
+	</header>
+</body>

@@ -21,7 +21,7 @@ class HomeController extends AbstractController
     {
         // On stocke la fonction qui appelle le tableau dans une variable
         $cocktailsRepository = new CocktailsRepository;
-        $cocktails = $cocktailsRepository->getCocktails();
+        $cocktails = $cocktailsRepository->findAllCocktails();
 
         // Trie les cocktails par date de création dans un ordre décroissant
         usort($cocktails, function ($a, $b) {
@@ -36,33 +36,5 @@ class HomeController extends AbstractController
             // Découpe le tableau 'cocktails' et prend ses 2 derniers cocktails (dans l'ordre décroissant défini au dessus)
             'cocktails' => array_slice($cocktails, 0, 2),
         ]);
-    }
-
-    public function categories() {
-
-        $categories = [
-            1 => [
-                "id" => 1,
-                "nom" => "cocktail",
-                "description" => "cocktails classiques avec alcool"
-            ],
-            2 => [
-                "id" => 2,
-                "nom" => "mocktail",
-                "description" => "cocktails sans alcool"
-            ],
-            3 => [
-                "id" => 3,
-                "nom" => "shooter",
-                "description" => "moins de 25 cl"
-            ],
-            4 => [
-                "id" => 4,
-                "nom" => "cocktails soft",
-                "description" => "cocktails sans alcool fort"
-            ],
-        ];
-        
-        return $categories;
     }
 }

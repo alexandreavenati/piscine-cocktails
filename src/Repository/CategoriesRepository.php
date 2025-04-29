@@ -4,7 +4,7 @@ namespace App\Repository;
 
 class CategoriesRepository {
 
-    public function categories() {
+    public function findAllCategories() {
         return [
             1 => [
                 "id" => 1,

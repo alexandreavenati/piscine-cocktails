@@ -24,7 +24,7 @@ class CocktailsController extends AbstractController
         $cocktailsRepository = new CocktailsRepository;
 
         // On stocke la fonction qui appelle le tableau dans une variable
-        $cocktails = $cocktailsRepository->getCocktails();
+        $cocktails = $cocktailsRepository->findAllCocktails();
 
         // On appelle la variable qui contient le tableau dans la page twig
         return $this->render('cocktails-list.html.twig', ['cocktails' => $cocktails]);
@@ -39,7 +39,7 @@ class CocktailsController extends AbstractController
     {
 
         $cocktailsRepository = new CocktailsRepository;
-        $cocktails = $cocktailsRepository->getCocktails();
+        $cocktails = $cocktailsRepository->findAllCocktails();
 
         // $id ici permet permet de récupérer le bon cocktail qui correspond à l'id donné dans le tableau
         return $this->render('cocktail-show.html.twig', ['cocktail' => $cocktails[$id]]);

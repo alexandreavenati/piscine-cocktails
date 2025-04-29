@@ -19,7 +19,7 @@ class CategoriesController extends AbstractController
     public function showCategories()
     {
         $getCategories = new CategoriesRepository;
-        $categories = $getCategories->categories();
+        $categories = $getCategories->findAllCategories();
 
         return $this->render('categories.html.twig', ['categories' => $categories]);
     }
@@ -29,7 +29,7 @@ class CategoriesController extends AbstractController
     public function showCategory($id)
     {
         $getCategories = new CategoriesRepository;
-        $categories = $getCategories->categories();
+        $categories = $getCategories->findAllCategories();
 
         return $this->render('categorie-info.html.twig', ['category' => $categories[$id]]);
     }

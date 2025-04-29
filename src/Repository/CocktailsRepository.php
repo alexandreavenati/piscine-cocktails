@@ -4,7 +4,7 @@ namespace App\Repository;
 
 class CocktailsRepository {
 
-    public function getCocktails() {
+    public function findAllCocktails() {
 
         return [
             1 => [

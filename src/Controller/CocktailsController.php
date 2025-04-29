@@ -159,6 +159,6 @@ class CocktailsController extends AbstractController
     public function showCategory($id){
         $categories = $this->categories();
 
-        return $this->render('categorie-info.html.twig', ['categorie' => $categories[$id]]);
+        return $this->render('categorie-info.html.twig', ['category' => $categories[$id]]);
     }
 }

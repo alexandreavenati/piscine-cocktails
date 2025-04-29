@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block metatitle %}
-    {{ categorie.nom }}
+    {{ category.nom }}
 {% endblock metatitle %}
 
 {% block main %}
 
 {% include 'partial/_aside-ad.html.twig' %}
-<h1>{{ categorie.nom }}</h1>
+<h1>{{ category.nom }}</h1>
 
 <section class="cocktail-list">
 		<article class="cocktail-card">
 			<div class="cocktail-info">
-				<p>{{ categorie.description }}</p>
+				<p>{{ category.description }}</p>
 			</div>
 		</article>
 </section>

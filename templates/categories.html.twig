@@ -1,7 +1,12 @@
 {% extends 'base.html.twig' %}
 
+{% block metatitle %}
+    Catégories
+{% endblock metatitle %}
+
 {% block main %}
-<main>
+
+{% include 'partial/_aside-ad.html.twig' %}
 
 <section class="cocktail-list">
 	{% for category in categories %}
@@ -14,5 +19,4 @@
 	{% endfor %}
 </section>
 
-</main>
 {% endblock main %}

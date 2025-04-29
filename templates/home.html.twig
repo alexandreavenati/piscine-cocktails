@@ -1,16 +1,16 @@
 {# Héritage de la structure du fichier 'base.html.twig' #}
 {% extends 'base.html.twig' %}
 
-{% block main %}
+{% block metatitle %}
+    Page d'accueil des cocktails de La Piscine
+{% endblock metatitle %}
 
-<main>
+{% block main %}
 
 {% include 'partial/_aside-ad.html.twig' %}
 
 	<h1>Cocktails récents</h1>
 
 	{% include 'partial/_loop-cocktails.html.twig' %}
-
-</main>
 
 {% endblock main %}

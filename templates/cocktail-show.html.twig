@@ -1,8 +1,11 @@
 {# Héritage de la structure du fichier 'base.html.twig' #}
 {% extends 'base.html.twig' %}
 
+{% block metatitle %}
+    {{cocktail.nom}}
+{% endblock metatitle %}
+
 {% block main %}
-<main>
 
 {% include 'partial/_aside-ad.html.twig' %}
 
@@ -25,5 +28,4 @@
 		</article>
 	</section>
 
-</main>
 {% endblock main %}

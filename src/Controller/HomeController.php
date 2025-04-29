@@ -16,7 +16,7 @@ class HomeController extends AbstractController
     // Création d'une fonction qui appelle le tableau
     public function getCocktails()
     {
-        return [
+        $cocktails = [
             1 => [
                 'id'            => 1,
                 'nom'           => 'Mojito',
@@ -88,6 +88,8 @@ class HomeController extends AbstractController
                 'description'   => 'Amertume élégante et notes d’agrumes pour ce grand classique italien.'
             ],
         ];
+
+        return $cocktails;
     }
 
     // URL page d'accueil
@@ -111,5 +113,33 @@ class HomeController extends AbstractController
             // Découpe le tableau 'cocktails' et prend ses 2 derniers cocktails (dans l'ordre décroissant défini au dessus)
             'cocktails' => array_slice($cocktails, 0, 2),
         ]);
+    }
+
+    public function categories() {
+
+        $categories = [
+            1 => [
+                "id" => 1,
+                "nom" => "cocktail",
+                "description" => "cocktails classiques avec alcool"
+            ],
+            2 => [
+                "id" => 2,
+                "nom" => "mocktail",
+                "description" => "cocktails sans alcool"
+            ],
+            3 => [
+                "id" => 3,
+                "nom" => "shooter",
+                "description" => "moins de 25 cl"
+            ],
+            4 => [
+                "id" => 4,
+                "nom" => "cocktails soft",
+                "description" => "cocktails sans alcool fort"
+            ],
+        ];
+        
+        return $categories;
     }
 }

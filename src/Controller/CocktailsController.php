@@ -16,7 +16,7 @@ class CocktailsController extends AbstractController
     // Création d'une fonction qui appelle le tableau
     public function getCocktails()
     {
-        return [
+        $cocktails = [
             1 => [
                 'id'            => 1,
                 'nom'           => 'Mojito',
@@ -88,6 +88,36 @@ class CocktailsController extends AbstractController
                 'description'   => 'Amertume élégante et notes d’agrumes pour ce grand classique italien.'
             ],
         ];
+
+        return $cocktails;
+    }
+
+    public function categories(){
+
+        $categories = [
+            1 => [
+                "id" => 1,
+                "nom" => "cocktail",
+                "description" => "cocktails classiques avec alcool"
+            ],
+            2 => [
+                "id" => 2,
+                "nom" => "mocktail",
+                "description" => "cocktails sans alcool"
+            ],
+            3 => [
+                "id" => 3,
+                "nom" => "shooter",
+                "description" => "moins de 25 cl"
+            ],
+            4 => [
+                "id" => 4,
+                "nom" => "cocktails soft",
+                "description" => "cocktails sans alcool fort"
+            ],
+        ];
+
+        return $categories;
     }
 
     // URL pour la page affichant tout les cocktails
@@ -114,5 +144,13 @@ class CocktailsController extends AbstractController
 
         // $id ici permet permet de récupérer le bon cocktail qui correspond à l'id donné dans le tableau
         return $this->render('cocktail-show.html.twig', ['cocktail' => $cocktails[$id]]);
+    }
+
+    #[Route('/categories', name: 'categories')]
+
+    public function showCategories() {
+        $categories = $this->categories();
+
+        return $this->render('categories.html.twig', ['categories' => $categories]);
     }
 }

@@ -97,23 +97,23 @@ class CocktailsController extends AbstractController
         $categories = [
             1 => [
                 "id" => 1,
-                "nom" => "cocktail",
-                "description" => "cocktails classiques avec alcool"
+                "nom" => "Cocktail",
+                "description" => "Cocktails classiques avec alcool"
             ],
             2 => [
                 "id" => 2,
-                "nom" => "mocktail",
-                "description" => "cocktails sans alcool"
+                "nom" => "Mocktail",
+                "description" => "Cocktails sans alcool"
             ],
             3 => [
                 "id" => 3,
-                "nom" => "shooter",
-                "description" => "moins de 25 cl"
+                "nom" => "Shooter",
+                "description" => "Moins de 25 cl"
             ],
             4 => [
                 "id" => 4,
-                "nom" => "cocktails soft",
-                "description" => "cocktails sans alcool fort"
+                "nom" => "Cocktails soft",
+                "description" => "Cocktails sans alcool fort"
             ],
         ];
 
@@ -152,5 +152,13 @@ class CocktailsController extends AbstractController
         $categories = $this->categories();
 
         return $this->render('categories.html.twig', ['categories' => $categories]);
+    }
+
+    #[Route('/categorie/{id}', name: 'categorie-show')]
+
+    public function showCategory($id){
+        $categories = $this->categories();
+
+        return $this->render('categorie-info.html.twig', ['categorie' => $categories[$id]]);
     }
 }

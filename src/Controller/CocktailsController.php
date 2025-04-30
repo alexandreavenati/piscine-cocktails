@@ -18,12 +18,12 @@ class CocktailsController extends AbstractController
     #[Route('/cocktails', name: 'list-cocktails')]
 
     // Permet d'afficher tout les cocktails
-    public function listCocktails()
+    // Injection automatique par Symfony de l'instance de classe CategoriesRepository grâce à l'autowiring
+    public function listCocktails(CocktailsRepository $cocktailsRepository)
     { 
-        // je crée une instance de classe avec CocktailsRepository et la stocke dans une variable
-        $cocktailsRepository = new CocktailsRepository;
 
         // On stocke la fonction qui appelle le tableau dans une variable
+        // Utilisation du repository injecté pour récupérer tout les cocktails
         $cocktails = $cocktailsRepository->findAllCocktails();
 
         // On appelle la variable qui contient le tableau dans la page twig
@@ -35,10 +35,11 @@ class CocktailsController extends AbstractController
     #[Route('/cocktail/{id}', name: 'cocktail-show')]
 
     // La partie {id} de l'URL est transmise automatiquement en paramètre lorsqu'on clique
-    public function cocktailShow($id)
+    // Injection automatique par Symfony de l'instance de classe CategoriesRepository grâce à l'autowiring
+    public function cocktailShow(CocktailsRepository $cocktailsRepository, $id)
     {
 
-        $cocktailsRepository = new CocktailsRepository;
+        // Utilisation du repository injecté pour récupérer un cocktail spécifique grâce à son id
         $cocktail = $cocktailsRepository->findOneById($id);
 
         // $id ici permet permet de récupérer le bon cocktail qui correspond à l'id donné dans le tableau

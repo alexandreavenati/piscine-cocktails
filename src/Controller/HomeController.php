@@ -17,19 +17,11 @@ class HomeController extends AbstractController
     // URL page d'accueil
     #[Route('/', name:'home')]
 
-    public function lastCocktails()
+    // Injection automatique par Symfony de l'instance de classe CategoriesRepository grâce à l'autowiring
+    public function lastCocktails(CocktailsRepository $cocktailsRepository)
     {
-        // On stocke la fonction qui appelle le tableau dans une variable
-        $cocktailsRepository = new CocktailsRepository;
-        $cocktails = $cocktailsRepository->findAllCocktails();
-
-        // Trie les cocktails par date de création dans un ordre décroissant
-        usort($cocktails, function ($a, $b) {
-            // Crée des objets DateTime à partir des dates de création
-            $dateA = new DateTime($a['date_creation']);
-            $dateB = new DateTime($b['date_creation']);
-            return $dateB <=> $dateA; // Compare les dates et les retourne dans l'ordre décroissant (plus récent au plus vieux)
-        });
+        // Utilisation du repository injecté pour récupérer les deux derniers cocktails triés par dates de créations
+        $cocktails = $cocktailsRepository->sortCocktailsByDate();
 
         // Utilisation de la méthode render qui permet de récupérer un fichier de view twig
         return $this->render('home.html.twig', [

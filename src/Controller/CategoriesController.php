@@ -16,20 +16,22 @@ class CategoriesController extends AbstractController
 {
     #[Route('/categories', name: 'categories')]
 
-    public function showCategories()
+    // Injection automatique par Symfony de l'instance de classe CategoriesRepository grâce à l'autowiring
+    public function showCategories(CategoriesRepository $categoriesRepository)
     {
-        $getCategories = new CategoriesRepository;
-        $categories = $getCategories->findAllCategories();
+        // Utilisation du repository injecté pour récupérer toutes les catégories
+        $categories = $categoriesRepository->findAllCategories();
 
         return $this->render('categories.html.twig', ['categories' => $categories]);
     }
 
     #[Route('/categorie/{id}', name: 'categorie-show')]
 
-    public function showCategory($id)
+    // Injection automatique par Symfony de l'instance de classe CategoriesRepository grâce à l'autowiring
+    public function showCategory(CategoriesRepository $categoriesRepository, $id)
     {
-        $getCategories = new CategoriesRepository;
-        $category = $getCategories->showOneCategory($id);
+         // Utilisation du repository injecté pour récupérer une catégorie spécifique grâce à son id
+        $category = $categoriesRepository->showOneCategory($id);
 
         return $this->render('categorie-info.html.twig', ['category' => $category]);
     }

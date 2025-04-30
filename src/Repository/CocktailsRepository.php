@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Repository;
+use \DateTime;
 
-class CocktailsRepository {
+class CocktailsRepository
+{
 
-    public function findAllCocktails() {
+    public function findAllCocktails()
+    {
 
         $cocktails = [
             1 => [
@@ -82,11 +85,27 @@ class CocktailsRepository {
         return $cocktails;
     }
 
-    public function findOneById($id) {
+    public function findOneById($id)
+    {
 
         $cocktails = $this->findAllCocktails();
         $cocktail = $cocktails[$id];
 
         return $cocktail;
+    }
+
+    public function sortCocktailsByDate()
+    {
+        $cocktails = $this->findAllCocktails();
+
+        // Trie les cocktails par date de création dans un ordre décroissant
+        usort($cocktails, function ($a, $b) {
+            // Crée des objets DateTime à partir des dates de création
+            $dateA = new DateTime($a['date_creation']);
+            $dateB = new DateTime($b['date_creation']);
+            return $dateB <=> $dateA; // Compare les dates et les retourne dans l'ordre décroissant (plus récent au plus vieux)
+        });
+
+        return $cocktails;
     }
 }

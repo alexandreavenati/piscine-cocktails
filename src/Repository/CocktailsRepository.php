@@ -6,7 +6,7 @@ class CocktailsRepository {
 
     public function findAllCocktails() {
 
-        return [
+        $cocktails = [
             1 => [
                 'id'            => 1,
                 'nom'           => 'Mojito',
@@ -78,5 +78,15 @@ class CocktailsRepository {
                 'description'   => 'Amertume élégante et notes d’agrumes pour ce grand classique italien.'
             ],
         ];
+
+        return $cocktails;
+    }
+
+    public function findOneById($id) {
+
+        $cocktails = $this->findAllCocktails();
+        $cocktail = $cocktails[$id];
+
+        return $cocktail;
     }
 }

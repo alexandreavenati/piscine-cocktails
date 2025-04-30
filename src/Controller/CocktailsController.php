@@ -39,10 +39,10 @@ class CocktailsController extends AbstractController
     {
 
         $cocktailsRepository = new CocktailsRepository;
-        $cocktails = $cocktailsRepository->findAllCocktails();
+        $cocktail = $cocktailsRepository->findOneById($id);
 
         // $id ici permet permet de récupérer le bon cocktail qui correspond à l'id donné dans le tableau
-        return $this->render('cocktail-show.html.twig', ['cocktail' => $cocktails[$id]]);
+        return $this->render('cocktail-show.html.twig', ['cocktail' => $cocktail]);
     }
 
 }

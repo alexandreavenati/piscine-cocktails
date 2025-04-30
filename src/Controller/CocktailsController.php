@@ -62,6 +62,7 @@ class CocktailsController extends AbstractController
 
             $cocktail = new Cocktail($name, $ingredients, $description, $image, $createdAt);
 
+            // message flash
             $this->addFlash("success", "Cocktail : " . $cocktail->name . " enregistré");
         }
         

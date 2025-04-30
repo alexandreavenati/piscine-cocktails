@@ -61,6 +61,8 @@ class CocktailsController extends AbstractController
             $createdAt = $request->request->get('creation_date');
 
             $cocktail = new Cocktail($name, $ingredients, $description, $image, $createdAt);
+
+            dd($cocktail);
         }
         
         return $this->render('create-cocktail.html.twig');

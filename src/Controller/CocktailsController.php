@@ -7,6 +7,7 @@ namespace App\Controller;
 // Remplace le require
 // On indique ici le namespace de la classe qu'on veut utiliser et Symfony + composer font le require automatiquement
 
+use App\Entity\Cocktail;
 use App\Repository\CocktailsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -46,4 +47,5 @@ class CocktailsController extends AbstractController
         return $this->render('cocktail-show.html.twig', ['cocktail' => $cocktail]);
     }
 
+    
 }

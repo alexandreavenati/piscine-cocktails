@@ -9,6 +9,12 @@
 
 	{% include 'partial/_aside-ad.html.twig' %}
 
+	{% for message in app.flashes('success') %}
+		<div class="success-message">
+			{{ message }}
+		</div>
+	{% endfor %}
+
 	<h1>Création d'un cocktail !</h1>
 
 	<form method="post">

@@ -62,7 +62,7 @@ class CocktailsController extends AbstractController
 
             $cocktail = new Cocktail($name, $ingredients, $description, $image, $createdAt);
 
-            dd($cocktail);
+            $this->addFlash("success", "Cocktail : " . $cocktail->name . " enregistré");
         }
         
         return $this->render('create-cocktail.html.twig');

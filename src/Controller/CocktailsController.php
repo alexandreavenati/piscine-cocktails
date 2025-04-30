@@ -47,5 +47,18 @@ class CocktailsController extends AbstractController
         return $this->render('cocktail-show.html.twig', ['cocktail' => $cocktail]);
     }
 
+    #[Route('/creer-cocktail', name:'create-cocktail')]
+
+    public function createCocktail() {
+
+        // Formulaire rempli
+        $name = "Gin Tonic";
+        $ingredients = "50 ml de gin, 100 ml de tonic (eau tonique), Concombre, 1 quartier de citron vert ou de citron jaune, Glaçons";
+        $description = "Cocktail simple et élégant à base de gin et d’eau tonique, très apprécié pour sa fraîcheur.";
+        $image = "https://resize.elle.fr/original/var/plain_site/storage/images/elle-a-table/recettes-de-cuisine/cocktail-gin-et-tonic-3017531/58539047-1-fre-FR/Cocktail-gin-et-tonic.jpg";
     
+        $cocktail = new Cocktail($name, $ingredients, $description, $image);
+
+        dd($cocktail);
+    }
 }

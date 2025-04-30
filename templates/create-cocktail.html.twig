@@ -1,0 +1,45 @@
+{# Héritage de la structure du fichier 'base.html.twig' #}
+{% extends 'base.html.twig' %}
+
+{% block metatitle %}
+	Crée ton cocktail !
+{% endblock metatitle %}
+
+{% block main %}
+
+	{% include 'partial/_aside-ad.html.twig' %}
+
+	<h1>Création d'un cocktail !</h1>
+
+	<form method="post">
+		<div class="form-group">
+			<label for="name">Nom</label>
+			<input type="text" placeholder="Entrez le nom du cocktail..." name="name" id="name">
+		</div>
+
+		<div class="form-group">
+			<label for="description">Description</label>
+			<input type="text" placeholder="Décrivez le cocktail..." name="description" id="description">
+		</div>
+
+		<div class="form-group">
+			<label for="ingredients">Ingrédients</label>
+			<textarea placeholder="Les ingrédients nécessaires..." name="ingredients" id="ingredients"></textarea>
+		</div>
+
+		<div class="form-group">
+			<label for="image">Image</label>
+			<input type="text" placeholder="Entrez un URL d'image..." name="image" id="image">
+		</div>
+
+		<div class="form-group">
+			<label for="creation_date">Date de création/invention</label>
+			<input type="date" name="creation_date" id="creation_date">
+		</div>
+
+		<div class="form-group center">
+			<button type="submit">Montrez votre cocktail !!!</button>
+		</div>
+	</form>
+
+{% endblock main %}

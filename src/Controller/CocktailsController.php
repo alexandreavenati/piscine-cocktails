@@ -12,6 +12,7 @@ use App\Repository\CocktailsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use \DateTime;
+use Symfony\Component\HttpFoundation\Request;
 
 class CocktailsController extends AbstractController
 {
@@ -49,17 +50,21 @@ class CocktailsController extends AbstractController
 
     #[Route('/creer-cocktail', name:'create-cocktail')]
 
-    public function createCocktail() {
+    public function createCocktail(Request $request) {
 
-        // Formulaire rempli
-        $name = "Gin Tonic";
-        $ingredients = "50 ml de gin, 100 ml de tonic (eau tonique), Concombre, 1 quartier de citron vert ou de citron jaune, Glaçons";
-        $description = "Cocktail simple et élégant à base de gin et d’eau tonique, très apprécié pour sa fraîcheur.";
-        $image = "https://resize.elle.fr/original/var/plain_site/storage/images/elle-a-table/recettes-de-cuisine/cocktail-gin-et-tonic-3017531/58539047-1-fre-FR/Cocktail-gin-et-tonic.jpg";
-        $createdAt = new DateTime('1858-01-01');
+        $cocktail = null;
+
+        if($request->isMethod('POST')){
+
+            $name = $request->request->get('name');
+            $ingredients = $request->request->get('ingredients');
+            $description = $request->request->get('description');
+            $image = $request->request->get('image');
+            $createdAt = $request->request->get('creation_date');
+
+            $cocktail = new Cocktail($name, $ingredients, $description, $image, $createdAt);
+        }
         
-        $cocktail = new Cocktail($name, $ingredients, $description, $image, $createdAt);
-
-        dd($cocktail);
+        return $this->render('create-cocktail.html.twig', ['cocktail' => $cocktail]);
     }
 }

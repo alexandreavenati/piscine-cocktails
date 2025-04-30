@@ -5,7 +5,7 @@ namespace App\Repository;
 class CategoriesRepository {
 
     public function findAllCategories() {
-        return [
+        $categories = [
             1 => [
                 "id" => 1,
                 "nom" => "Cocktail",
@@ -27,5 +27,15 @@ class CategoriesRepository {
                 "description" => "Cocktails sans alcool fort"
             ],
         ];
+
+        return $categories;
+    }
+
+    public function showOneCategory($id) {
+
+        $categories = $this->findAllCategories();
+        $category = $categories[$id];
+
+        return $category;
     }
 }

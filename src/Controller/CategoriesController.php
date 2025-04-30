@@ -29,8 +29,8 @@ class CategoriesController extends AbstractController
     public function showCategory($id)
     {
         $getCategories = new CategoriesRepository;
-        $categories = $getCategories->findAllCategories();
+        $category = $getCategories->showOneCategory($id);
 
-        return $this->render('categorie-info.html.twig', ['category' => $categories[$id]]);
+        return $this->render('categorie-info.html.twig', ['category' => $category]);
     }
 }

@@ -52,8 +52,6 @@ class CocktailsController extends AbstractController
 
     public function createCocktail(Request $request) {
 
-        $cocktail = null;
-
         if($request->isMethod('POST')){
 
             $name = $request->request->get('name');
@@ -65,6 +63,6 @@ class CocktailsController extends AbstractController
             $cocktail = new Cocktail($name, $ingredients, $description, $image, $createdAt);
         }
         
-        return $this->render('create-cocktail.html.twig', ['cocktail' => $cocktail]);
+        return $this->render('create-cocktail.html.twig');
     }
 }

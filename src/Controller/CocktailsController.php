@@ -13,6 +13,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use \DateTime;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class CocktailsController extends AbstractController
 {
@@ -50,7 +52,7 @@ class CocktailsController extends AbstractController
 
     #[Route('/creer-cocktail', name:'create-cocktail')]
 
-    public function createCocktail(Request $request) {
+    public function createCocktail(Request $request, EntityManagerInterface $entityManager) {
 
         if($request->isMethod('POST')){
 
@@ -61,6 +63,12 @@ class CocktailsController extends AbstractController
             $createdAt = $request->request->get('creation_date');
 
             $cocktail = new Cocktail($name, $ingredients, $description, $image, $createdAt);
+
+            // sauvegarde le cocktail créé
+            $entityManager->persist($cocktail);
+
+            // pousse le cocktail créé dans la base de donnée
+			$entityManager->flush();
 
             // message flash
             $this->addFlash("success", "Cocktail : " . $cocktail->name . " enregistré");

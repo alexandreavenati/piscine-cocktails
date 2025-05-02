@@ -44,7 +44,7 @@ class Cocktail {
     public bool $isPublished;
 
     #[ORM\Column(type: 'datetime')]
-    public DateTimeInterface $publishedAt;
+    public DateTime $publishedAt;
 
     // méthode pour créer un cocktail
     public function __construct($name, $ingredients, $description, $image, $createdAt) {
@@ -54,7 +54,7 @@ class Cocktail {
         $this->ingredients = $ingredients;
         $this->description = $description;
         $this->image = $image;
-        $this->createdAt = $createdAt;
+        $this->createdAt = new DateTime($createdAt);
 
         // valeurs remplis automatiquement lors de l'envoi des données par l'utilisateur
         $this->publishedAt = new DateTime();
